@@ -10,15 +10,19 @@ moodApp.init = () => {
     const imageUpload;
     $(".image-upload-form").on('submit', () => {
 
-        imageUpload = $('#image-upload');
+      const imageUpload = $('#image-upload');
+      let faceDesc = await faceapi.detectAllFaces(input).withFaceLandmarks().withFaceDescriptors();
     })
 }
 
 //doc ready
 
 $(() => {
+  
   await faceapi.loadSsdMobilenetv1Model(MODEL_URL)
   await faceapi.loadFaceLandmarkModel(MODEL_URL)
   await faceapi.loadFaceRecognitionModel(MODEL_URL)
+
+
   moodApp.init();
 })
